@@ -7,10 +7,7 @@ class Calculator {
   previousOperand = "";
   currentOperand = "";
 
-  constructor() {
-    this.previousOperand = "";
-    this.currentOperand = "";
-  }
+  constructor() {}
 
   clear() {
     this.currentOperand = "";
@@ -78,6 +75,19 @@ class Calculator {
   let numberButtons = document.querySelectorAll(".number");
   let operatorButtons = document.querySelectorAll(".operator");
 
+  for (let button of numberButtons) {
+    button.onclick = function () {
+      calculator.appendNumber(button.innerHTML);
+      calculator.updateDisplay();
+    };
+  }
+
+  for (let button of operatorButtons) {
+    button.onclick = function () {
+      calculator.selectOperation(button.innerHTML);
+      calculator.updateDisplay();
+    };
+  }
   document.querySelector(".equal-btn").onclick = function () {
     calculator.calculate();
     calculator.showResult();
@@ -86,18 +96,4 @@ class Calculator {
     calculator.clear();
     calculator.updateDisplay();
   };
-
-  for (let button of numberButtons) {
-    button.onclick = function () {
-      calculator.appendNumber(button.innerHTML);
-      calculator.updateDisplay();
-    };
-  }
-  
-  for (let button of operatorButtons) {
-    button.onclick = function () {
-      calculator.selectOperation(button.innerHTML);
-      calculator.updateDisplay();
-    };
-  }
 })();
